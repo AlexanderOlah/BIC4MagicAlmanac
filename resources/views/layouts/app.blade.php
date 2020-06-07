@@ -145,7 +145,7 @@
         <div class="content has-text-centered">
             @guest
                 <small>Not logged in</small>
-            @else if
+            @else
                 <small>Logged in as {{ Auth::user()->name }}</small>
             @endguest
         </div>
