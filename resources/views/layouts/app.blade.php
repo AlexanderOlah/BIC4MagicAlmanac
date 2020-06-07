@@ -143,7 +143,11 @@
 
     <footer class="footer">
         <div class="content has-text-centered">
-            <small>Here comes some footer<br/>Example edit.</small>
+            @guest
+                <small>Not logged in</small>
+            @else if
+                <small>Logged in as {{ Auth::user()->name }}</small>
+            @endguest
         </div>
     </footer>
 </div>
