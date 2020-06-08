@@ -20,8 +20,12 @@ window.Vue = vue;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
+
+Vue.component('list-spells', require('./components/ListSpells.vue').default);
+Vue.component('list-kinds', require('./components/ListKinds.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
