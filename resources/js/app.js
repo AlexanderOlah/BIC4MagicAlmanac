@@ -25,6 +25,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
 
 Vue.component('list-spells', require('./components/ListSpells.vue').default);
+Vue.component('search-spells', require('./components/SearchSpells.vue').default);
+
 Vue.component('list-kinds', require('./components/ListKinds.vue').default);
 
 /**
