@@ -4119,15 +4119,15 @@ fieldset[disabled] .button {
 }
 
 .table.is-hoverable tbody tr:not(.is-selected):hover {
-  background-color: #e5e5ff;
+  background-color: medium-purple;
 }
 
 .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover {
-  background-color: #e5e5ff;
+  background-color: medium-purple;
 }
 
 .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover:nth-child(even) {
-  background-color: #e5e5ff;
+  background-color: medium-purple;
 }
 
 .table.is-narrow td,
