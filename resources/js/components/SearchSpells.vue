@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h1>Search Spells by ID</h1>
+        <h1>Search spells by keyword</h1>
 
-        <input v-on:input="query()"  type="number" name="q" min="1" placeholder="1">
+        <input v-model="q" v-on:input="query(q)"  type="text"  placeholder="Spellname">
         <table class="table table-hover">
             <tbody>
             <tr>
@@ -46,9 +46,9 @@
         },
 
         methods: {
-            query() {
+            query(q) {
                 axios
-                    .post('/search/spell', {q: "q"})
+                    .post('/search/spell', {q})
                     .then(({data}) => this.searchSpells = data);
                 console.log('Search spells called.')
             }
