@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Search Spells by ID</h1>
-        <input type="number" v-on:input="query($event, id)" min="0" placeholder="0">
+
         <table class="table table-hover">
             <tbody>
             <tr>
@@ -14,6 +14,9 @@
                 <th>created_at</th>
                 <th>updated_at</th>
             </tr>
+            <tr><label>
+                <input type="number" v-on:input="query($event, spells.id)" min="0" placeholder="1">
+            </label></tr>
             <tr v-for="spells in searchSpells" :key="spells.id">
                 <td>{{spells.id}}</td>
                 <td>{{spells.slug}}</td>
@@ -25,6 +28,7 @@
                 <td>{{spells.updated_at}}</td>
             </tr>
             </tbody>
+
         </table>
     </div>
 </template>
@@ -35,21 +39,23 @@
             console.log('Component mounted.')
         },
         data() {
-          return {
-              searchSpells: {}
-          }
+            let id;
+            return {
+                searchSpells: {}
+            }
         },
         created() {
-            axios.get('./search/spell')
+            axios.get('/search/spell')
                 .then(({data}) => this.searchSpells = data);
             console.log('Search spells created.')
-        }
-    };
-    methods: {
-        query: (event, id){
-            axios.post('./search/spell', {q: "id" })
-                .then(({data}) => this.searchSpells = data);
-            console.log('Search spells called.')
+        },
+
+        methods: {
+            query(event, id) {
+                axios.post('/search/spell', {q: "id"})
+                    .then(({data}) => this.searchSpells = data);
+                console.log('Search spells called.')
+            }
         }
     }
 </script>
