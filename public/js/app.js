@@ -2192,36 +2192,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   data: function data() {
-    var id;
     return {
       searchSpells: {}
     };
   },
-  created: function created() {
-    var _this = this;
-
-    axios.get('/search/spell').then(function (_ref) {
-      var data = _ref.data;
-      return _this.searchSpells = data;
-    });
-    console.log('Search spells created.');
-  },
+  created: function created() {},
   methods: {
-    query: function query(event, id) {
-      var _this2 = this;
+    query: function query() {
+      var _this = this;
 
       axios.post('/search/spell', {
-        q: "id"
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        return _this2.searchSpells = data;
+        q: "q"
+      }).then(function (_ref) {
+        var data = _ref.data;
+        return _this.searchSpells = data;
       });
       console.log('Search spells called.');
     }
@@ -20156,24 +20145,20 @@ var render = function() {
   return _c("div", [
     _c("h1", [_vm._v("Search Spells by ID")]),
     _vm._v(" "),
+    _c("input", {
+      attrs: { type: "number", name: "q", min: "1", placeholder: "1" },
+      on: {
+        input: function($event) {
+          return _vm.query()
+        }
+      }
+    }),
+    _vm._v(" "),
     _c("table", { staticClass: "table table-hover" }, [
       _c(
         "tbody",
         [
           _vm._m(0),
-          _vm._v(" "),
-          _c("tr", [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "number", min: "0", placeholder: "1" },
-                on: {
-                  input: function($event) {
-                    return _vm.query($event, _vm.spells.id)
-                  }
-                }
-              })
-            ])
-          ]),
           _vm._v(" "),
           _vm._l(_vm.searchSpells, function(spells) {
             return _c("tr", { key: spells.id }, [
@@ -32883,15 +32868,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/SearchSpells.vue ***!
   \**************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SearchSpells_vue_vue_type_template_id_db3e6b04___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchSpells.vue?vue&type=template&id=db3e6b04& */ "./resources/js/components/SearchSpells.vue?vue&type=template&id=db3e6b04&");
 /* harmony import */ var _SearchSpells_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchSpells.vue?vue&type=script&lang=js& */ "./resources/js/components/SearchSpells.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SearchSpells_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SearchSpells_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -32921,7 +32905,7 @@ component.options.__file = "resources/js/components/SearchSpells.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/SearchSpells.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33248,8 +33232,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\ForkFolder\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\ForkFolder\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
