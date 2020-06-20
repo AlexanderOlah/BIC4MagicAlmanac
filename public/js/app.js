@@ -2209,11 +2209,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   methods: {
-    query: function query() {
+    query: function query(q) {
       var _this = this;
 
       axios.post('/search/spell', {
-        q: "q"
+        q: q
       }).then(function (_ref) {
         var data = _ref.data;
         return _this.searchSpells = data;
@@ -20141,14 +20141,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Search Spells by ID")]),
+    _c("h1", [_vm._v("Search spells by keyword")]),
     _vm._v(" "),
     _c("input", {
-      attrs: { type: "number", name: "q", min: "1", placeholder: "1" },
+      directives: [
+        { name: "model", rawName: "v-model", value: _vm.q, expression: "q" }
+      ],
+      attrs: { type: "text", placeholder: "Spellname" },
+      domProps: { value: _vm.q },
       on: {
-        input: function($event) {
-          return _vm.query()
-        }
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.q = $event.target.value
+          },
+          function($event) {
+            return _vm.query(_vm.q)
+          }
+        ]
       }
     }),
     _vm._v(" "),
