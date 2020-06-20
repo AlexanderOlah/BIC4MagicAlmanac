@@ -5,16 +5,18 @@
             <tbody>
             <tr>
                 <th>name:</th>
-                <td><input type="text" id="name-kind" name="name-kind"></td>
+                <td><input type="text" id="nameKind"></td>
             </tr>
             <tr>
-                <th>description</th>
-                <td><input type="text" id="description-kind" name="description-kind"></td>
+                <th>description:</th>
+                <td><input type="text" id="descriptionKind"></td>
             </tr>
             </tbody>
         </table>
 
-        <button id="create-kind" name="create-kind">Create Kind</button>
+        <button id="createKind">Create Kind</button>
+        <button id="Name">Create Name</button>
+        <button id="Desc">Create Describe</button>
         <!--
               <div class="content" hidden id="created-Kind">
             <table class="table table-hover">
@@ -53,12 +55,14 @@
 </template>
 
 <script>
-    const kind = document.getElementById('create-kind');
-    addEventListener('click',kind);
 
+    const bt = document.getElementById('createKind');
+    if(bt) {
+        bt.addEventListener('click', createKind);
+    }
     function createKind() {
-
-    axios.post('./kind', {name: document.getElementById("name-kind"),
-        description: document.getElementById("description-kind")})
-}
+    axios.post('./kind', {name: document.getElementById("nameKind"),
+        description: document.getElementById("descriptionKind")});
+    console.log('After Post kinds created.');
+    }
 </script>

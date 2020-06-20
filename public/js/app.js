@@ -1960,14 +1960,20 @@ module.exports = {
 //
 //
 //
-var kind = document.getElementById('create-kind');
-addEventListener('click', kind);
+//
+//
+var bt = document.getElementById('createKind');
+
+if (bt) {
+  bt.addEventListener('click', createKind);
+}
 
 function createKind() {
   axios.post('./kind', {
-    name: document.getElementById("name-kind"),
-    description: document.getElementById("description-kind")
+    name: document.getElementById("nameKind"),
+    description: document.getElementById("descriptionKind")
   });
+  console.log('After Post kinds created.');
 }
 
 /***/ }),
@@ -19876,32 +19882,24 @@ var staticRenderFns = [
           _c("tr", [
             _c("th", [_vm._v("name:")]),
             _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                attrs: { type: "text", id: "name-kind", name: "name-kind" }
-              })
-            ])
+            _c("td", [_c("input", { attrs: { type: "text", id: "nameKind" } })])
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("th", [_vm._v("description")]),
+            _c("th", [_vm._v("description:")]),
             _vm._v(" "),
             _c("td", [
-              _c("input", {
-                attrs: {
-                  type: "text",
-                  id: "description-kind",
-                  name: "description-kind"
-                }
-              })
+              _c("input", { attrs: { type: "text", id: "descriptionKind" } })
             ])
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("button", { attrs: { id: "create-kind", name: "create-kind" } }, [
-        _vm._v("Create Kind")
-      ])
+      _c("button", { attrs: { id: "createKind" } }, [_vm._v("Create Kind")]),
+      _vm._v(" "),
+      _c("button", { attrs: { id: "Name" } }, [_vm._v("Create Name")]),
+      _vm._v(" "),
+      _c("button", { attrs: { id: "Desc" } }, [_vm._v("Create Describe")])
     ])
   }
 ]
@@ -33232,8 +33230,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\ForkFolder\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\ForkFolder\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
