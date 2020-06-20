@@ -72,11 +72,11 @@
                                href="{{ route('spell.index') }}">
                                 List
                             </a>
+                            <hr class="navbar-divider">
                             <a class="navbar-item {{ request()->routeIs('spell.create') ? 'is-active' : '' }}"
                                href="{{ route('spell.create') }}">
                                 Create
                             </a>
-                            <hr class="navbar-divider">
                             <a class="navbar-item {{ request()->routeIs('spell.search') ? 'is-active' : '' }}"
                                href="{{ route('spell.search') }}">
                                 Search
@@ -94,6 +94,7 @@
                                href="{{ route('kind.index') }}">
                                 List
                             </a>
+                            <hr class="navbar-divider">
                             <a class="navbar-item {{ request()->routeIs('kind.create') ? 'is-active' : '' }}"
                                href="{{ route('kind.create') }}">
                                 Create

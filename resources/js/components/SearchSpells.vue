@@ -1,33 +1,38 @@
 <template>
-    <div>
-        <h1>Search spells by keyword</h1>
+    <div class="container is-fluid">
+        <h1 class="title is-3 is-spaced">Search Spells by Keyword</h1>
 
-        <input v-model="q" v-on:input="query(q)"  type="text"  placeholder="Spellname">
-        <table class="table table-hover">
-            <tbody>
-            <tr>
-                <th>id</th>
-                <th>slug</th>
-                <th>name</th>
-                <th>quote</th>
-                <th>description</th>
-                <th>kind_id</th>
-                <th>created_at</th>
-                <th>updated_at</th>
-            </tr>
-            <tr v-for="spells in searchSpells" :key="spells.id">
-                <td>{{spells.id}}</td>
-                <td>{{spells.slug}}</td>
-                <td>{{spells.name}}</td>
-                <td>{{spells.quote}}</td>
-                <td>{{spells.description}}</td>
-                <td>{{spells.kind_id}}</td>
-                <td>{{spells.created_at}}</td>
-                <td>{{spells.updated_at}}</td>
-            </tr>
-            </tbody>
-
-        </table>
+        <div class="columns is-multiline is-mobile">
+            <div class="column is-half"><input v-model="q" v-on:input="query(q)"  type="text" class="input is-primary" placeholder="Spell Name"></div>
+        </div>
+        <div class="table-container">
+            <table class="table is-striped is-hoverable table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Slug</th>
+                        <th>Name</th>
+                        <th>Quote</th>
+                        <th>Description</th>
+                        <th>Kind</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="spells in searchSpells" :key="spells.id">
+                        <td>{{spells.id}}</td>
+                        <td>{{spells.slug}}</td>
+                        <td>{{spells.name}}</td>
+                        <td>{{spells.quote}}</td>
+                        <td>{{spells.description}}</td>
+                        <td>{{spells.kind_id}}</td>
+                        <td>{{spells.created_at}}</td>
+                        <td>{{spells.updated_at}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
