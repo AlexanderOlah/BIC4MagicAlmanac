@@ -36,6 +36,7 @@ class KindController extends Controller
      */
     public function create()
     {
+
         return view('kind.create');
     }
 

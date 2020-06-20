@@ -29,6 +29,9 @@ Vue.component('search-spells', require('./components/SearchSpells.vue').default)
 
 Vue.component('list-kinds', require('./components/ListKinds.vue').default);
 
+Vue.component('create-spells', require('./components/CreateSpells.vue').default);
+Vue.component('create-kinds', require('./components/CreateKinds.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
