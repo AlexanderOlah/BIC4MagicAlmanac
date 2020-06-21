@@ -2321,7 +2321,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2370,7 +2369,7 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref2.data;
         return _this2.editSpells = data;
       });
-      console.log('Create spells called.');
+      console.log('Update spells called.');
     }
   }
 });
@@ -20696,10 +20695,15 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "container is-fluid" }, [
-      _c("h1", { staticClass: "title is-3 is-spaced" }, [
-        _vm._v("Edit the chosen Spell")
-      ]),
+    _c("div", [
+      _c(
+        "h1",
+        {
+          staticClass: "title is-3 is-spaced",
+          staticStyle: { "padding-top": "100px" }
+        },
+        [_vm._v("Edit the chosen Spell")]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "columns is-multiline is-mobile" }, [
         _c("div", { staticClass: "column is-two-thirds" }, [

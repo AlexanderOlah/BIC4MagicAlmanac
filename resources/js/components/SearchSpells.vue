@@ -33,10 +33,10 @@
                 </tbody>
             </table>
         </div>
-        <div class="container is-fluid">
 
 
-            <h1 class="title is-3 is-spaced">Edit the chosen Spell</h1>
+        <div>
+            <h1 class="title is-3 is-spaced" style="padding-top: 100px">Edit the chosen Spell</h1>
 
             <div class="columns is-multiline is-mobile">
                 <div class="column is-two-thirds"><input v-model="name" class="input is-primary" type="text" key="spellSlug" placeholder="Spell Name"></div>
@@ -48,7 +48,6 @@
             </div>
 
             <button class="button is-primary" type="submit" v-on:click="update(name, quote, description, kind_id, editSpells)">Submit</button>
-
         </div>
     </div>
 </template>
@@ -91,7 +90,7 @@
                 axios
                     .put('/spell/'+ editSpells.slug, {name, quote, description, kind_id})
                     .then(({data}) => this.editSpells = data);
-                console.log('Create spells called.')
+                console.log('Update spells called.')
             }
         }
     }
