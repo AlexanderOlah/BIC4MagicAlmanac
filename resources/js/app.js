@@ -28,9 +28,12 @@ Vue.component('list-spells', require('./components/ListSpells.vue').default);
 Vue.component('search-spells', require('./components/SearchSpells.vue').default);
 
 Vue.component('list-kinds', require('./components/ListKinds.vue').default);
+Vue.component('edit-spells', require('./components/EditSpells.vue').default);
 
 Vue.component('create-spells', require('./components/CreateSpells.vue').default);
-Vue.component('create-kinds', require('./components/CreateKinds.vue').default);
+
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
