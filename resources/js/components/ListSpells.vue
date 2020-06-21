@@ -49,9 +49,10 @@
                 .get('./list/spell')
                 .then(({data}) => this.listSpells = data);
             console.log('List spells created.')
+        },
+        methods: {
+
         }
     };
-    methods: {
 
-    }
 </script>

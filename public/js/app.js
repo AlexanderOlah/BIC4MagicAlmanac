@@ -2059,29 +2059,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "EditSpells",
   mounted: function mounted() {
     console.log('Component mounted.');
-    console.log('Testing: Slug is ' + this.spellSlug);
-    var currentUrl = window.location.pathname;
-    console.log('Testing: current URL is ' + currentUrl);
   },
   data: function data() {
     return {
-      editSpells: {},
-      spellSlug: ""
+      slug: "",
+      name: "",
+      quote: "",
+      description: "",
+      kind_id: ""
     };
   },
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    axios.get('/spell/' + this.slug + '/edit').then(function (_ref) {
+      var data = _ref.data;
+      return _this.editSpells = data;
+    });
+    console.log('Edit spells created.');
+  },
   methods: {
-    /*
-    create(name, quote, description, kind_id) {
-        axios
-            .post('/spell', {name, quote, description, kind_id})
-            .then(({data}) => this.createSpells = data);
-        console.log('Create spells called.')
+    update: function update(name, quote, description, kind_id) {
+      var _this2 = this;
+
+      axios.post('/spell', {
+        name: name,
+        quote: quote,
+        description: description,
+        kind_id: kind_id
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.createSpells = data;
+      });
+      console.log('Create spells called.');
     }
-      */
   }
 });
 
@@ -2165,12 +2178,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   data: function data() {
     return {
+      name: "",
+      description: "",
+      editKinds: {},
       listKinds: {}
     };
   },
@@ -2182,10 +2209,28 @@ __webpack_require__.r(__webpack_exports__);
       return _this.listKinds = data;
     });
     console.log('List kinds created.');
+  },
+  methods: {
+    edit: function edit(kinds) {
+      this.name = kinds.name;
+      this.description = kinds.description;
+      this.editKinds = kinds;
+      console.log('Edit kinds called.');
+    },
+    update: function update(name, description, editKinds) {
+      var _this2 = this;
+
+      axios.put('/kind/' + editKinds.slug, {
+        name: name,
+        description: description
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.editKinds = data;
+      });
+      console.log('Update kinds called.');
+    }
   }
 });
-
-methods: {}
 
 /***/ }),
 
@@ -2251,10 +2296,9 @@ __webpack_require__.r(__webpack_exports__);
       return _this.listSpells = data;
     });
     console.log('List spells created.');
-  }
+  },
+  methods: {}
 });
-
-methods: {}
 
 /***/ }),
 
@@ -20276,9 +20320,9 @@ var render = function() {
                 expression: "name"
               }
             ],
-            key: this.spellSlug,
+            key: "spellSlug",
             staticClass: "input is-primary",
-            attrs: { type: "text", placeholder: this.spellSlug },
+            attrs: { type: "text", placeholder: "Spell Name" },
             domProps: { value: _vm.name },
             on: {
               input: function($event) {
@@ -20302,7 +20346,7 @@ var render = function() {
               }
             ],
             staticClass: "input is-primary",
-            attrs: { type: "text", placeholder: "Kind ID" },
+            attrs: { type: "text", placeholder: "Kind Id" },
             domProps: { value: _vm.kind_id },
             on: {
               input: function($event) {
@@ -20451,9 +20495,85 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "container is-fluid" }, [
-      _c("h1", { staticClass: "title is-3 is-spaced" }, [
-        _vm._v("List of all Kinds")
+      _c("div", [
+        _c("h1", { staticClass: "title is-3 is-spaced" }, [
+          _vm._v("Edit the chosen Kind")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "columns is-multiline is-mobile" }, [
+          _c("div", { staticClass: "column is-two-thirds" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              key: "kindSlug",
+              staticClass: "input is-primary",
+              attrs: { type: "text", placeholder: "Kind Name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column is-full" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.description,
+                  expression: "description"
+                }
+              ],
+              staticClass: "textarea is-primary",
+              attrs: { type: "text", placeholder: "Kind Description" },
+              domProps: { value: _vm.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.description = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "button is-primary",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                return _vm.update(_vm.name, _vm.description, _vm.editKinds)
+              }
+            }
+          },
+          [_vm._v("Submit")]
+        )
       ]),
+      _vm._v(" "),
+      _c(
+        "h1",
+        {
+          staticClass: "title is-3 is-spaced",
+          staticStyle: { "padding-top": "100px" }
+        },
+        [_vm._v("List of all Kinds")]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "table-container" }, [
         _c(
@@ -20465,19 +20585,30 @@ var render = function() {
             _c(
               "tbody",
               _vm._l(_vm.listKinds, function(kinds) {
-                return _c("tr", { key: kinds.id }, [
-                  _c("td", [_vm._v(_vm._s(kinds.id))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(kinds.slug))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(kinds.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(kinds.description))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(kinds.created_at))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(kinds.updated_at))])
-                ])
+                return _c(
+                  "tr",
+                  {
+                    key: kinds.id,
+                    on: {
+                      click: function($event) {
+                        return _vm.edit(kinds)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(kinds.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(kinds.slug))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(kinds.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(kinds.description))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(kinds.created_at))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(kinds.updated_at))])
+                  ]
+                )
               }),
               0
             )
@@ -33088,6 +33219,7 @@ Vue.component('list-spells', __webpack_require__(/*! ./components/ListSpells.vue
 Vue.component('search-spells', __webpack_require__(/*! ./components/SearchSpells.vue */ "./resources/js/components/SearchSpells.vue")["default"]);
 Vue.component('edit-spells', __webpack_require__(/*! ./components/EditSpells.vue */ "./resources/js/components/EditSpells.vue")["default"]);
 Vue.component('list-kinds', __webpack_require__(/*! ./components/ListKinds.vue */ "./resources/js/components/ListKinds.vue")["default"]);
+Vue.component('edit-spells', __webpack_require__(/*! ./components/EditSpells.vue */ "./resources/js/components/EditSpells.vue")["default"]);
 Vue.component('create-spells', __webpack_require__(/*! ./components/CreateSpells.vue */ "./resources/js/components/CreateSpells.vue")["default"]);
 Vue.component('create-kinds', __webpack_require__(/*! ./components/CreateKinds.vue */ "./resources/js/components/CreateKinds.vue")["default"]);
 /**
@@ -33942,8 +34074,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Volumes/Extern/Marlene/Dropbox/4. Semester/IE – Information Engineering/Projekt/Git-Repo/BIC4MagicAlmanac/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Volumes/Extern/Marlene/Dropbox/4. Semester/IE – Information Engineering/Projekt/Git-Repo/BIC4MagicAlmanac/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

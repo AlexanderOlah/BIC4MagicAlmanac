@@ -24,7 +24,7 @@ Route::resource('kind', 'KindController');
 
 Route::get('/search/spell', 'SpellController@search')->name('spell.search');
 Route::post('/search/spell', 'SpellController@query')->name('spell.query');
-Route::get('/edit/{slug}/spell', 'SpellController@edit')->name('spell.edit');
+Route::get('/spell/{slug}/edit', 'SpellController@edit')->name('spell.edit');
 
 Route::get('/list/kind', 'KindController@list')->name('kind.list');
 Route::get('/list/spell', 'SpellController@list')->name('spell.list');
