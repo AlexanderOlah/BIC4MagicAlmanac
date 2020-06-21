@@ -1903,9 +1903,11 @@ module.exports = {
 /*!**********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CreateKinds.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -1926,55 +1928,34 @@ module.exports = {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var bt = document.getElementById('createKind');
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "CreateKinds",
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  },
+  data: function data() {
+    return {
+      name: "",
+      description: "",
+      createKinds: {}
+    };
+  },
+  created: function created() {},
+  methods: {
+    create: function create(name, description) {
+      var _this = this;
 
-if (bt) {
-  bt.addEventListener('click', createKind);
-}
-
-function createKind() {
-  axios.post('./kind', {
-    name: document.getElementById("nameKind"),
-    description: document.getElementById("descriptionKind")
-  });
-  console.log('After Post kinds created.');
-}
+      axios.post('/kind', {
+        name: name,
+        description: description
+      }).then(function (_ref) {
+        var data = _ref.data;
+        return _this.createKinds = data;
+      });
+      console.log('Create kinds called.');
+    }
+  }
+});
 
 /***/ }),
 
@@ -2079,41 +2060,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSpells",
-  props: {
-    spellSlug: {
-      required: true
-    }
-  },
   mounted: function mounted() {
     console.log('Component mounted.');
+    console.log('Testing: Slug is ' + this.spellSlug);
+    var currentUrl = window.location.pathname;
+    console.log('Testing: current URL is ' + currentUrl);
   },
   data: function data() {
-    return {};
+    return {
+      editSpells: {},
+      spellSlug: ""
+    };
   },
-  created: function created() {
-    var _this = this;
-
-    axios.get('/edit/' + this.spellSlug + '/spell').then(function (_ref) {
-      var data = _ref.data;
-      return _this.editSpells = data;
-    });
-    console.log('Edit spells created.');
-  },
+  created: function created() {},
   methods: {
-    create: function create(name, quote, description, kind_id) {
-      var _this2 = this;
-
-      axios.post('/spell', {
-        name: name,
-        quote: quote,
-        description: description,
-        kind_id: kind_id
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        return _this2.createSpells = data;
-      });
-      console.log('Create spells called.');
+    /*
+    create(name, quote, description, kind_id) {
+        axios
+            .post('/spell', {name, quote, description, kind_id})
+            .then(({data}) => this.createSpells = data);
+        console.log('Create spells called.')
     }
+      */
   }
 });
 
@@ -2337,6 +2305,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2345,8 +2330,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       searchSpells: {},
       editSpells: {},
-      slug: "",
-      q: ""
+      q: "",
+      name: "",
+      quote: "",
+      description: "",
+      kind_id: ""
     };
   },
   created: function created() {},
@@ -2362,14 +2350,27 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log('Search spells called.');
     },
-    edit: function edit(slug) {
+    edit: function edit(spells) {
+      this.name = spells.name;
+      this.quote = spells.quote;
+      this.description = spells.description;
+      this.kind_id = spells.kind_id;
+      this.editSpells = spells;
+      console.log('Edit spells called.');
+    },
+    update: function update(name, quote, description, kind_id, editSpells) {
       var _this2 = this;
 
-      axios.get('/edit/' + slug + '/spell', slug).then(function (_ref2) {
+      axios.put('/spell/' + editSpells.slug, {
+        name: name,
+        quote: quote,
+        description: description,
+        kind_id: kind_id
+      }).then(function (_ref2) {
         var data = _ref2.data;
         return _this2.editSpells = data;
       });
-      console.log('Clicked to edit.');
+      console.log('Create spells called.');
     }
   }
 });
@@ -20018,42 +20019,79 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", [_vm._v("Create Kinds Component")]),
+  return _c("div", [
+    _c("div", { staticClass: "container is-fluid" }, [
+      _c("h1", { staticClass: "title is-3 is-spaced" }, [
+        _vm._v("Create a new Kind")
+      ]),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-hover" }, [
-        _c("tbody", [
-          _c("tr", [
-            _c("th", [_vm._v("name:")]),
-            _vm._v(" "),
-            _c("td", [_c("input", { attrs: { type: "text", id: "nameKind" } })])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", [_vm._v("description:")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", { attrs: { type: "text", id: "descriptionKind" } })
-            ])
-          ])
+      _c("div", { staticClass: "columns is-multiline is-mobile" }, [
+        _c("div", { staticClass: "column is-two-thirds" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "input is-primary",
+            attrs: { type: "text", placeholder: "Kind Name" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column is-full" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description"
+              }
+            ],
+            staticClass: "textarea is-primary",
+            attrs: { type: "text", placeholder: "Kind Description" },
+            domProps: { value: _vm.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              }
+            }
+          })
         ])
       ]),
       _vm._v(" "),
-      _c("button", { attrs: { id: "createKind" } }, [_vm._v("Create Kind")]),
-      _vm._v(" "),
-      _c("button", { attrs: { id: "Name" } }, [_vm._v("Create Name")]),
-      _vm._v(" "),
-      _c("button", { attrs: { id: "Desc" } }, [_vm._v("Create Describe")])
+      _c(
+        "button",
+        {
+          staticClass: "button is-primary",
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              return _vm.create(_vm.name, _vm.description)
+            }
+          }
+        },
+        [_vm._v("Submit")]
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -20239,9 +20277,9 @@ var render = function() {
                 expression: "name"
               }
             ],
-            key: _vm.spellSlug,
+            key: this.spellSlug,
             staticClass: "input is-primary",
-            attrs: { type: "text", placeholder: _vm.spellSlug },
+            attrs: { type: "text", placeholder: this.spellSlug },
             domProps: { value: _vm.name },
             on: {
               input: function($event) {
@@ -20629,7 +20667,7 @@ var render = function() {
                   key: spells.id,
                   on: {
                     click: function($event) {
-                      return _vm.edit(spells.slug)
+                      return _vm.edit(spells)
                     }
                   }
                 },
@@ -20655,6 +20693,131 @@ var render = function() {
             0
           )
         ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container is-fluid" }, [
+      _c("h1", { staticClass: "title is-3 is-spaced" }, [
+        _vm._v("Edit the chosen Spell")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns is-multiline is-mobile" }, [
+        _c("div", { staticClass: "column is-two-thirds" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            key: "spellSlug",
+            staticClass: "input is-primary",
+            attrs: { type: "text", placeholder: "Spell Name" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column is-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.kind_id,
+                expression: "kind_id"
+              }
+            ],
+            staticClass: "input is-primary",
+            attrs: { type: "text", placeholder: "Kind Id" },
+            domProps: { value: _vm.kind_id },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.kind_id = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column is-full" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.quote,
+                expression: "quote"
+              }
+            ],
+            staticClass: "input is-primary",
+            attrs: { type: "text", placeholder: "Spell Quote" },
+            domProps: { value: _vm.quote },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.quote = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column is-full" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description"
+              }
+            ],
+            staticClass: "textarea is-primary",
+            attrs: { type: "text", placeholder: "Spell Description" },
+            domProps: { value: _vm.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "button is-primary",
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              return _vm.update(
+                _vm.name,
+                _vm.quote,
+                _vm.description,
+                _vm.kind_id,
+                _vm.editSpells
+              )
+            }
+          }
+        },
+        [_vm._v("Submit")]
       )
     ])
   ])
@@ -32997,15 +33160,14 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!*************************************************!*\
   !*** ./resources/js/components/CreateKinds.vue ***!
   \*************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateKinds_vue_vue_type_template_id_d96975b0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateKinds.vue?vue&type=template&id=d96975b0& */ "./resources/js/components/CreateKinds.vue?vue&type=template&id=d96975b0&");
 /* harmony import */ var _CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateKinds.vue?vue&type=script&lang=js& */ "./resources/js/components/CreateKinds.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -33035,15 +33197,13 @@ component.options.__file = "resources/js/components/CreateKinds.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/CreateKinds.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CreateKinds.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CreateKinds.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateKinds_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
