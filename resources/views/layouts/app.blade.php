@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link {{ request()->routeIs('kind.index') || request()->routeIs('kind.create') ? 'is-active' : '' }}">
+                        <a class="navbar-link {{ request()->routeIs('kind.index') || request()->routeIs('kind.create')  ? 'is-active' : '' }}">
                             Kinds
                         </a>
 
@@ -95,10 +95,12 @@
                                 List
                             </a>
                             <hr class="navbar-divider">
+
                             <a class="navbar-item {{ request()->routeIs('kind.create') ? 'is-active' : '' }}"
                                href="{{ route('kind.create') }}">
                                 Create
                             </a>
+
                         </div>
                     </div>
 
