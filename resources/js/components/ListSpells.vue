@@ -45,8 +45,9 @@
           }
         },
         created() {
-            axios.get('./list/spell')
-            .then(({data}) => this.listSpells = data);
+            axios
+                .get('./list/spell')
+                .then(({data}) => this.listSpells = data);
             console.log('List spells created.')
         }
     };

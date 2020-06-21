@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="spells in searchSpells" :key="spells.id">
+                    <tr v-for="spells in searchSpells" :key="spells.id" v-on:click="edit(spells)">
                         <td>{{spells.id}}</td>
                         <td>{{spells.slug}}</td>
                         <td>{{spells.name}}</td>
@@ -33,6 +33,22 @@
                 </tbody>
             </table>
         </div>
+
+
+        <div>
+            <h1 class="title is-3 is-spaced" style="padding-top: 100px">Edit the chosen Spell</h1>
+
+            <div class="columns is-multiline is-mobile">
+                <div class="column is-two-thirds"><input v-model="name" class="input is-primary" type="text" key="spellSlug" placeholder="Spell Name"></div>
+                <div class="column is-2"><input v-model="kind_id" class="input is-primary" type="text"  placeholder="Kind Id"></div>
+
+                <div class="column is-full"><input v-model="quote" class="input is-primary" type="text"  placeholder="Spell Quote"></div>
+
+                <div class="column is-full"><textarea v-model="description" class="textarea is-primary" type="text" placeholder="Spell Description"></textarea></div>
+            </div>
+
+            <button class="button is-primary" type="submit" v-on:click="update(name, quote, description, kind_id, editSpells)">Submit</button>
+        </div>
     </div>
 </template>
 
@@ -43,12 +59,17 @@
         },
         data() {
             return {
-                searchSpells: {}
+                searchSpells: {},
+                editSpells: {},
+                q: "",
+                name: "",
+                quote:"",
+                description:"",
+                kind_id: ""
             }
         },
         created() {
-
-        },
+            },
 
         methods: {
             query(q) {
@@ -56,6 +77,20 @@
                     .post('/search/spell', {q})
                     .then(({data}) => this.searchSpells = data);
                 console.log('Search spells called.')
+            },
+            edit(spells) {
+                this.name = spells.name
+                this.quote = spells.quote
+                this.description = spells.description
+                this.kind_id = spells.kind_id
+                this.editSpells = spells
+                console.log('Edit spells called.')
+            },
+            update(name, quote, description, kind_id, editSpells) {
+                axios
+                    .put('/spell/'+ editSpells.slug, {name, quote, description, kind_id})
+                    .then(({data}) => this.editSpells = data);
+                console.log('Update spells called.')
             }
         }
     }

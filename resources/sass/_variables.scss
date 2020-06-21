@@ -24,7 +24,7 @@ $header-purple: #cecefd;
 $medium-purple: #e5e5ff;
 $background-purple: #f2f2ff;
 
-$primary: hsl(240, 92%, 77%);
+$primary: $primary-purple;
 $grey-darker:  hsl(0, 0%, 21%);
 $grey-dark:    hsl(0, 0%, 29%);
 $grey:         hsl(0, 0%, 48%);
@@ -37,6 +37,6 @@ $card-header-color: #fff;
 $footer-padding: 1rem 2.5rem 2.5rem;
 
 // Tables
-$table-head-background-color: #cecefd;
-$table-row-hover-background-color: medium-purple;
-$table-striped-row-even-hover-background-color: medium-purple;
+$table-head-background-color: $header-purple;
+$table-row-hover-background-color: $medium-purple;
+$table-striped-row-even-hover-background-color: $medium-purple;
