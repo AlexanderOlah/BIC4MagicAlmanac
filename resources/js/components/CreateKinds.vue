@@ -1,51 +1,68 @@
 <template>
     <div>
-        <div class="container is-fluid">
+        <h1>Create Kinds Component</h1>
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <th>name:</th>
+                <td><input type="text" id="nameKind"></td>
+            </tr>
+            <tr>
+                <th>description:</th>
+                <td><input type="text" id="descriptionKind"></td>
+            </tr>
+            </tbody>
+        </table>
 
-
-            <h1 class="title is-3 is-spaced" >Create a new Kind</h1>
-
-            <div class="columns is-multiline is-mobile">
-                <div class="column is-two-thirds"><input v-model="name" class="input is-primary" type="text"  placeholder="Kind Name"></div>
-
-                <div class="column is-full"><textarea v-model="description" class="textarea is-primary" type="text" placeholder="Kind Description"></textarea></div>
-            </div>
-
-            <button class="button is-primary" type="submit" v-on:click="create(name, description)">Submit</button>
-
+        <button id="createKind">Create Kind</button>
+        <button id="Name">Create Name</button>
+        <button id="Desc">Create Describe</button>
+        <!--
+              <div class="content" hidden id="created-Kind">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <th>id:</th>
+                    <td>{{kinds.id}}</td>
+                </tr>
+                <tr>
+                    <th>slug:</th>
+                    <td>{{kinds.slug}}</td>
+                </tr>
+                <tr>
+                    <th>name:</th>
+                    <td>{{kinds.name}}</td>
+                </tr>
+                <tr>
+                    <th>description:</th>
+                    <td>{{kinds.description}}</td>
+                </tr>
+                <tr>
+                    <th>created at:</th>
+                    <td>{{kinds.created_at}}</td>
+                </tr>
+                <tr>
+                    <th>updated at</th>
+                    <td>{{kinds.updated_at}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+        -->
+
 
     </div>
 </template>
 
 <script>
-    export default {
-        name: "CreateKinds",
 
-        mounted() {
-            console.log('Component mounted.')
-        },
-        data() {
-            return {
-                name:"", description:"",
-                createKinds: {}
-            }
-        },
-        created() {
-
-        },
-
-        methods: {
-            create(name, description) {
-                axios
-                    .post('/kind', {name, description})
-                    .then(({data}) => this.createKinds = data);
-                console.log('Create kinds called.')
-            }
-        }
+    const bt = document.getElementById('createKind');
+    if(bt) {
+        bt.addEventListener('click', createKind);
+    }
+    function createKind() {
+    axios.post('./kind', {name: document.getElementById("nameKind"),
+        description: document.getElementById("descriptionKind")});
+    console.log('After Post kinds created.');
     }
 </script>
-
-<style scoped>
-
-</style>
