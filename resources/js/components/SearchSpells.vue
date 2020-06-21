@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="spells in searchSpells" :key="spells.id">
+                    <tr v-for="spells in searchSpells" :key="spells.id" v-on:click="edit(spells.slug)">
                         <td>{{spells.id}}</td>
                         <td>{{spells.slug}}</td>
                         <td>{{spells.name}}</td>
@@ -43,7 +43,10 @@
         },
         data() {
             return {
-                searchSpells: {}
+                searchSpells: {},
+                editSpells: {},
+                slug: "",
+                q: ""
             }
         },
         created() {
@@ -56,6 +59,12 @@
                     .post('/search/spell', {q})
                     .then(({data}) => this.searchSpells = data);
                 console.log('Search spells called.')
+            },
+            edit(slug){
+                axios
+                    .get('/edit/'+slug+'/spell', slug)
+                    .then(({data}) => this.editSpells = data);
+                console.log('Clicked to edit.')
             }
         }
     }
