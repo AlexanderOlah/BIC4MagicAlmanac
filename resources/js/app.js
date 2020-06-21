@@ -32,6 +32,7 @@ Vue.component('list-kinds', require('./components/ListKinds.vue').default);
 Vue.component('edit-spells', require('./components/EditSpells.vue').default);
 
 Vue.component('create-spells', require('./components/CreateSpells.vue').default);
+Vue.component('create-kinds', require('./components/CreateKinds.vue').default);
 
 
 
