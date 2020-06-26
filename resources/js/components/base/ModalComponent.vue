@@ -109,7 +109,7 @@
             update(name, quote, description, kind_id, editSpells) {
                 axios
                     .put('/spell/'+ editSpells.slug, {name, quote, description, kind_id})
-                    .then(({data}) => this.editSpells = data);
+                    .then(({data}) => this.modal_editSpells = data);
                 console.log('Update spells called.')
             },
         },

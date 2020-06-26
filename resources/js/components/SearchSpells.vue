@@ -128,6 +128,8 @@
                 this.modal_quote = spells.quote
                 this.modal_description = spells.description
                 this.modal_kind_id = spells.kind_id
+                this.modal_slug = spells.slug
+                this.editSpells = spells
                 this.isModalVisible = true;
                 console.log('showModal called.')
             },
