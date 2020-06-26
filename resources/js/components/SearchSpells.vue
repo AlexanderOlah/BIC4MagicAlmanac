@@ -43,7 +43,6 @@
             :quote = "this.modal_quote"
             :slug = "this.modal_slug"
             :editSpells = "this.editSpells"
-            @open="ModalComponent.fill()"
         />
 
     </div>

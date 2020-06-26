@@ -24,6 +24,7 @@ window.Vue = vue;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
 Vue.component('modal-component', require('./components/base/ModalComponent.vue').default);
+Vue.component('modal-message', require('./components/base/ModalMessage.vue').default);
 
 Vue.component('list-spells', require('./components/ListSpells.vue').default);
 Vue.component('search-spells', require('./components/SearchSpells.vue').default);

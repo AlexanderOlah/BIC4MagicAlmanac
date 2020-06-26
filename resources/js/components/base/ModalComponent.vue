@@ -25,8 +25,17 @@
                         <button type="button" class="button is-primary" @click="close" aria-label="Close modal">Cancel</button>
                     </footer>
                 </div>
+
+                <ModalMessage
+                    v-show="isModalMessageVisible"
+                    @close="closeModalMessage"
+                    :messageTitle=this.messageTitle
+                    :created-spell=this.createdSpell
+                />
+
             </div>
     </transition>
+
 </template>
 <style>
     .modal-backdrop {
@@ -52,9 +61,12 @@
 
 </style>
 <script>
+    import ModalMessage from "./ModalMessage";
     export default {
         name: 'ModalComponent',
-
+        components: {
+            ModalMessage,
+        },
         props: {
             name: {
                 required: true,
@@ -91,6 +103,9 @@
                 modal_description:"",
                 modal_kind_id: "",
                 modal_slug:"",
+                isModalMessageVisible: false,
+                messageTitle:"",
+                createdSpell:""
             }
         },
         methods: {
@@ -118,7 +133,28 @@
                     .put('/spell/'+ editSpells.slug, {name, quote, description, kind_id})
                     .then(({data}) => this.modal_editSpells = data);
                 console.log('Update spells called.')
+                this.showModalMessage("Success!", editSpells);
             },
+            // for our success/fail message popup
+            showModalMessage(messageTitle, editSpells) {
+
+                axios
+                    .get('/spell/'+ editSpells.slug)
+                    .then(({data}) => this.modal_showSpells = data);
+                console.log('getNew spells called.')
+                console.log('Testing: Slug for this call was .' + editSpells.slug)
+
+                this.messageTitle = messageTitle
+                this.createdSpell = editSpells
+                this.isModalMessageVisible = true
+
+                console.log('showModal called.')
+                console.log('Testing: Slug of the entry we changed is ' + editSpells.slug)
+            },
+            closeModalMessage() {
+                this.isModalMessageVisible = false;
+                this.close(); //close the ModalComponent too
+            }
         },
         created() {
             console.log('ModalComponent created.')
