@@ -30,7 +30,7 @@
                     v-show="isModalMessageVisible"
                     @close="closeModalMessage"
                     :messageTitle=this.messageTitle
-                    :created-spell=this.createdSpell
+                    :createdSpell=this.createdSpell
                 />
 
             </div>
@@ -61,7 +61,7 @@
 
 </style>
 <script>
-    import ModalMessage from "./ModalMessage";
+    import ModalMessage from "./ModalSpellMessage";
     export default {
         name: 'ModalComponent',
         components: {
@@ -134,7 +134,8 @@
                     .put('/spell/'+ editSpells.slug, {name, quote, description, kind_id})
                     .then(({data}) => this.modal_editSpells = data);
                 console.log('Update spells called.')
-                this.showModalMessage("Success!", editSpells);
+                this.showModalMessage("Success!", this.modal_editSpells);
+                editSpells = this.modal_editSpells;
             },
             // for our success/fail message popup
             showModalMessage(messageTitle, editSpells) {

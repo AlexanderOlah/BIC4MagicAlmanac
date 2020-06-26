@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import ModalComponent from "./base/ModalComponent";
+    import ModalComponent from "./base/ModalSpellComponent";
     export default {
         components: {
             ModalComponent,

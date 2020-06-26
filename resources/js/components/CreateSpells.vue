@@ -27,14 +27,29 @@
             </div>
 
             <button class="button is-primary" type="submit" v-on:click="create(name, quote, description, kind_id)">Submit</button>
+            <button class="button is-primary" type="submit" v-on:click="showModal(createSpells)">Show</button>
 
         </div>
+        <ModalComponent
+            v-show="isModalVisible"
+            @close="closeModal"
+            :description="this.modal_description"
+            :kind_id="this.modal_kind_id"
+            :name = "this.modal_name"
+            :quote = "this.modal_quote"
+            :slug = "this.modal_slug"
+            :editSpells = "this.createSpells"
+        />
 
     </div>
 </template>
 
 <script>
+    import ModalComponent from "./base/ModalSpellComponent";
     export default {
+        components: {
+            ModalComponent,
+        },
         name: "CreateSpells",
 
         mounted() {
@@ -44,7 +59,14 @@
             return {
                 name:"", quote:"", description:"", kind_id:"",
                 createSpells: {},
-                listKinds: {}
+                listKinds: {},
+
+                isModalVisible: false,
+                modal_name: '',
+                modal_quote: '',
+                modal_description: '',
+                modal_kind_id: '',
+                modal_slug:''
             }
         },
         created() {
@@ -59,7 +81,19 @@
                     .post('/spell', {name, quote, description, kind_id})
                     .then(({data}) => this.createSpells = data);
                 console.log('Create spells called.')
-            }
+            },
+            showModal(spells) {
+                this.modal_name = spells.name
+                this.modal_quote = spells.quote
+                this.modal_description = spells.description
+                this.modal_kind_id = spells.kind_id
+                this.modal_slug = spells.slug
+                this.isModalVisible = true
+                console.log('showModal called.')
+            },
+            closeModal() {
+                this.isModalVisible = false;
+            },
         }
     }
 </script>

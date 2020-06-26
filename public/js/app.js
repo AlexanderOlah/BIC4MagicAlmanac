@@ -1968,6 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base_ModalSpellComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base/ModalSpellComponent */ "./resources/js/components/base/ModalSpellComponent.vue");
 //
 //
 //
@@ -1991,7 +1992,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    ModalComponent: _base_ModalSpellComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   name: "CreateSpells",
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2002,24 +2030,51 @@ __webpack_require__.r(__webpack_exports__);
       quote: "",
       description: "",
       kind_id: "",
-      createSpells: {}
+      createSpells: {},
+      listKinds: {},
+      isModalVisible: false,
+      modal_name: '',
+      modal_quote: '',
+      modal_description: '',
+      modal_kind_id: '',
+      modal_slug: ''
     };
   },
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    axios.get('/list/kind').then(function (_ref) {
+      var data = _ref.data;
+      return _this.listKinds = data;
+    });
+    console.log('List kinds created.');
+  },
   methods: {
     create: function create(name, quote, description, kind_id) {
-      var _this = this;
+      var _this2 = this;
 
       axios.post('/spell', {
         name: name,
         quote: quote,
         description: description,
         kind_id: kind_id
-      }).then(function (_ref) {
-        var data = _ref.data;
-        return _this.createSpells = data;
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.createSpells = data;
       });
       console.log('Create spells called.');
+    },
+    showModal: function showModal(spells) {
+      this.modal_name = spells.name;
+      this.modal_quote = spells.quote;
+      this.modal_description = spells.description;
+      this.modal_kind_id = spells.kind_id;
+      this.modal_slug = spells.slug;
+      this.isModalVisible = true;
+      console.log('showModal called.');
+    },
+    closeModal: function closeModal() {
+      this.isModalVisible = false;
     }
   }
 });
@@ -2311,24 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base_ModalComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base/ModalComponent */ "./resources/js/components/base/ModalComponent.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _base_ModalSpellComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base/ModalSpellComponent */ "./resources/js/components/base/ModalSpellComponent.vue");
 //
 //
 //
@@ -2382,7 +2420,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ModalComponent: _base_ModalComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ModalComponent: _base_ModalSpellComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   name: "SearchSpells",
   mounted: function mounted() {
@@ -2423,34 +2461,13 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log('Search spells called.');
     },
-    edit: function edit(spells) {
-      this.name = spells.name;
-      this.quote = spells.quote;
-      this.description = spells.description;
-      this.kind_id = spells.kind_id;
-      this.slug = spells.slug;
-      this.editSpells = spells;
-      console.log('Edit spells called.');
-    },
-    update: function update(name, quote, description, kind_id, editSpells) {
-      var _this2 = this;
-
-      axios.put('/spell/' + editSpells.slug, {
-        name: name,
-        quote: quote,
-        description: description,
-        kind_id: kind_id
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        return _this2.editSpells = data;
-      });
-      console.log('Update spells called.');
-    },
     showModal: function showModal(spells) {
       this.modal_name = spells.name;
       this.modal_quote = spells.quote;
       this.modal_description = spells.description;
       this.modal_kind_id = spells.kind_id;
+      this.modal_slug = spells.slug;
+      this.editSpells = spells;
       this.isModalVisible = true;
       console.log('showModal called.');
     },
@@ -2462,10 +2479,188 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalSpellComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalSpellMessage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalSpellMessage */ "./resources/js/components/base/ModalSpellMessage.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ModalComponent',
+  components: {
+    ModalMessage: _ModalSpellMessage__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    name: {
+      required: true,
+      type: String
+    },
+    quote: {
+      required: true,
+      type: String
+    },
+    description: {
+      required: true,
+      type: String
+    },
+    kind_id: {
+      required: true,
+      type: String
+    },
+    slug: {
+      required: true,
+      type: String
+    },
+    editSpells: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      modal_editSpells: {},
+      modal_name: "",
+      modal_quote: "",
+      modal_description: "",
+      modal_kind_id: "",
+      modal_slug: "",
+      modal_showSpells: {},
+      isModalMessageVisible: false,
+      messageTitle: "",
+      createdSpell: {}
+    };
+  },
+  methods: {
+    close: function close() {
+      this.modal_name = "";
+      this.modal_quote = "";
+      this.modal_description = "";
+      this.modal_kind_id = "";
+      this.modal_slug = "";
+      this.modal_editSpells = "";
+      this.$emit('close');
+      console.log('Modal closed & cleared.');
+    },
+    fill: function fill() {
+      this.modal_name = this.name;
+      this.modal_quote = this.quote;
+      this.modal_description = this.description;
+      this.modal_kind_id = this.kind_id;
+      this.modal_slug = this.slug;
+      this.modal_editSpells = this.editSpells;
+      console.log('Modal filled.');
+    },
+    update: function update(name, quote, description, kind_id, editSpells) {
+      var _this = this;
+
+      axios.put('/spell/' + editSpells.slug, {
+        name: name,
+        quote: quote,
+        description: description,
+        kind_id: kind_id
+      }).then(function (_ref) {
+        var data = _ref.data;
+        return _this.modal_editSpells = data;
+      });
+      console.log('Update spells called.');
+      this.showModalMessage("Success!", this.modal_editSpells);
+      editSpells = this.modal_editSpells;
+    },
+    // for our success/fail message popup
+    showModalMessage: function showModalMessage(messageTitle, editSpells) {
+      this.messageTitle = messageTitle;
+      this.createdSpell = editSpells;
+      this.isModalMessageVisible = true;
+      console.log('showModal called.');
+      console.log('Testing: Slug of the entry we changed is ' + editSpells.slug);
+    },
+    closeModalMessage: function closeModalMessage() {
+      this.isModalMessageVisible = false;
+      this.close(); //close the ModalComponent too
+    }
+  },
+  created: function created() {
+    console.log('ModalComponent created.');
+  },
+  computed: {
+    fills: function fills() {
+      return this.fill();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellMessage.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalSpellMessage.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2520,77 +2715,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ModalComponent',
+  name: "ModalMessage",
   props: {
-    name: {
+    messageTitle: {
       required: true,
       type: String
     },
-    quote: {
-      required: true,
-      type: String
-    },
-    description: {
-      required: true,
-      type: String
-    },
-    kind_id: {
-      required: true,
-      type: String
-    },
-    slug: {
-      required: true,
-      type: String
-    },
-    editSpells: {
+    createdSpell: {
       required: true
     }
   },
   data: function data() {
     return {
-      modal_editSpells: {},
-      modal_name: "",
-      modal_quote: "",
-      modal_description: "",
-      modal_kind_id: "",
-      modal_slug: ""
+      modal_message: "",
+      modal_showSpells: {}
     };
   },
   methods: {
     close: function close() {
       this.$emit('close');
+      console.log('ModalMessage closed & cleared.');
     },
-    fill: function fill() {
-      this.modal_name = this.name;
-      this.modal_quote = this.quote;
-      this.modal_description = this.description;
-      this.modal_kind_id = this.kind_id;
-      this.modal_slug = this.slug;
-      this.modal_editSpells = this.editSpells;
-      console.log('Modal filled.');
-    },
-    update: function update(name, quote, description, kind_id, editSpells) {
+    query: function query(q) {
       var _this = this;
 
-      axios.put('/spell/' + editSpells.slug, {
-        name: name,
-        quote: quote,
-        description: description,
-        kind_id: kind_id
+      console.log('Testing: Description for this call before searchSpell was ' + q);
+      axios.post('/search/spell', {
+        q: q
       }).then(function (_ref) {
         var data = _ref.data;
-        return _this.editSpells = data;
+        return _this.modal_showSpells = data;
       });
-      console.log('Update spells called.');
+      console.log('searchSpell called.');
     }
-  },
-  created: function created() {
-    console.log('ModalComponent created.');
   }
 });
 
@@ -2639,10 +2797,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20254,15 +20412,15 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalSpellComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -20977,130 +21135,192 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "container is-fluid" }, [
-      _c("h1", { staticClass: "title is-3 is-spaced" }, [
-        _vm._v("Create a new Spell")
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "container is-fluid" }, [
+        _c("h1", { staticClass: "title is-3 is-spaced" }, [
+          _vm._v("Create a new Spell")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "columns is-multiline is-mobile" }, [
+          _c("div", { staticClass: "column is-two-thirds" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "input is-primary",
+              attrs: { type: "text", placeholder: "Spell Name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column is-one-third" }, [
+            _c("div", { staticClass: "field is-horizontal" }, [
+              _c("label", { staticClass: "field-label is-normal" }, [
+                _vm._v("Kind Id:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("div", { staticClass: "select is-primary" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kind_id,
+                          expression: "kind_id"
+                        }
+                      ],
+                      staticClass: "form-control select",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.kind_id = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    _vm._l(_vm.listKinds, function(kinds) {
+                      return _c("option", { key: kinds.id }, [
+                        _vm._v(_vm._s(kinds.id))
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column is-full" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.quote,
+                  expression: "quote"
+                }
+              ],
+              staticClass: "input is-primary",
+              attrs: { type: "text", placeholder: "Spell Quote" },
+              domProps: { value: _vm.quote },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.quote = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column is-full" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.description,
+                  expression: "description"
+                }
+              ],
+              staticClass: "textarea is-primary",
+              attrs: { type: "text", placeholder: "Spell Description" },
+              domProps: { value: _vm.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.description = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "button is-primary",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                return _vm.create(
+                  _vm.name,
+                  _vm.quote,
+                  _vm.description,
+                  _vm.kind_id
+                )
+              }
+            }
+          },
+          [_vm._v("Submit")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "button is-primary",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                return _vm.showModal(_vm.createSpells)
+              }
+            }
+          },
+          [_vm._v("Show")]
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "columns is-multiline is-mobile" }, [
-        _c("div", { staticClass: "column is-two-thirds" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "input is-primary",
-            attrs: { type: "text", placeholder: "Spell Name" },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.name = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column is-2" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.kind_id,
-                expression: "kind_id"
-              }
-            ],
-            staticClass: "input is-primary",
-            attrs: { type: "text", placeholder: "Kind ID" },
-            domProps: { value: _vm.kind_id },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.kind_id = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column is-full" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.quote,
-                expression: "quote"
-              }
-            ],
-            staticClass: "input is-primary",
-            attrs: { type: "text", placeholder: "Spell Quote" },
-            domProps: { value: _vm.quote },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.quote = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column is-full" }, [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.description,
-                expression: "description"
-              }
-            ],
-            staticClass: "textarea is-primary",
-            attrs: { type: "text", placeholder: "Spell Description" },
-            domProps: { value: _vm.description },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.description = $event.target.value
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "button is-primary",
-          attrs: { type: "submit" },
-          on: {
-            click: function($event) {
-              return _vm.create(
-                _vm.name,
-                _vm.quote,
-                _vm.description,
-                _vm.kind_id
-              )
-            }
+      _c("ModalComponent", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isModalVisible,
+            expression: "isModalVisible"
           }
+        ],
+        attrs: {
+          description: this.modal_description,
+          kind_id: this.modal_kind_id,
+          name: this.modal_name,
+          quote: this.modal_quote,
+          slug: this.modal_slug,
+          editSpells: this.createSpells
         },
-        [_vm._v("Submit")]
-      )
-    ])
-  ])
+        on: { close: _vm.closeModal }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -21625,7 +21845,7 @@ var render = function() {
                   {
                     key: spells.id,
                     on: {
-                      click: function($event) {
+                      dblclick: function($event) {
                         return _vm.showModal(spells)
                       }
                     }
@@ -21655,136 +21875,6 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", [
-        _c(
-          "h1",
-          {
-            staticClass: "title is-3 is-spaced",
-            staticStyle: { "padding-top": "100px" }
-          },
-          [_vm._v("Edit the chosen Spell")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "columns is-multiline is-mobile" }, [
-          _c("div", { staticClass: "column is-two-thirds" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.name,
-                  expression: "name"
-                }
-              ],
-              key: "spellSlug",
-              staticClass: "input is-primary",
-              attrs: { type: "text", placeholder: "Spell Name" },
-              domProps: { value: _vm.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.name = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-2" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.kind_id,
-                  expression: "kind_id"
-                }
-              ],
-              staticClass: "input is-primary",
-              attrs: { type: "text", placeholder: "Kind Id" },
-              domProps: { value: _vm.kind_id },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.kind_id = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-full" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.quote,
-                  expression: "quote"
-                }
-              ],
-              staticClass: "input is-primary",
-              attrs: { type: "text", placeholder: "Spell Quote" },
-              domProps: { value: _vm.quote },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.quote = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-full" }, [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.description,
-                  expression: "description"
-                }
-              ],
-              staticClass: "textarea is-primary",
-              attrs: { type: "text", placeholder: "Spell Description" },
-              domProps: { value: _vm.description },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.description = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "button is-primary",
-            attrs: { type: "submit" },
-            on: {
-              click: function($event) {
-                return _vm.update(
-                  _vm.name,
-                  _vm.quote,
-                  _vm.description,
-                  _vm.kind_id,
-                  _vm.editSpells
-                )
-              }
-            }
-          },
-          [_vm._v("Submit")]
-        )
-      ]),
-      _vm._v(" "),
       _c("ModalComponent", {
         directives: [
           {
@@ -21802,12 +21892,7 @@ var render = function() {
           slug: this.modal_slug,
           editSpells: this.editSpells
         },
-        on: {
-          close: _vm.closeModal,
-          open: function($event) {
-            return _vm.ModalComponent.fill()
-          }
-        }
+        on: { close: _vm.closeModal }
       })
     ],
     1
@@ -21845,10 +21930,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=template&id=28af021a&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalComponent.vue?vue&type=template&id=28af021a& ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=template&id=437dddaf&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalSpellComponent.vue?vue&type=template&id=437dddaf& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21861,119 +21946,290 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "modal-fade" } }, [
-    _c("div", { staticClass: "modal" }, [
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        on: {
+          mouseenter: function($event) {
+            return _vm.fill()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-background" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "modal-card" }, [
+          _c("header", { staticClass: "modal-card-head" }, [
+            _c("p", { staticClass: "modal-card-title" }, [
+              _vm._v("Edit Entry")
+            ]),
+            _vm._v(" "),
+            _c("button", {
+              staticClass: "delete",
+              attrs: { "aria-label": "close" },
+              on: { click: _vm.close }
+            })
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "modal-card-body" }, [
+            _c("div", { staticClass: "columns is-multiline is-mobile" }, [
+              _c("div", { staticClass: "column is-two-thirds" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.modal_name,
+                      expression: "modal_name"
+                    }
+                  ],
+                  key: "spellSlug",
+                  staticClass: "input is-primary",
+                  attrs: { type: "text", placeholder: "Spell Name" },
+                  domProps: { value: _vm.modal_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.modal_name = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.modal_kind_id,
+                      expression: "modal_kind_id"
+                    }
+                  ],
+                  staticClass: "input is-primary",
+                  attrs: { type: "text", placeholder: "Kind Id" },
+                  domProps: { value: _vm.modal_kind_id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.modal_kind_id = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-full" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.modal_quote,
+                      expression: "modal_quote"
+                    }
+                  ],
+                  staticClass: "input is-primary",
+                  attrs: { type: "text", placeholder: "Spell Quote" },
+                  domProps: { value: _vm.modal_quote },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.modal_quote = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-full" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.modal_description,
+                      expression: "modal_description"
+                    }
+                  ],
+                  staticClass: "textarea is-primary",
+                  attrs: { type: "text", placeholder: "Spell Description" },
+                  domProps: { value: _vm.modal_description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.modal_description = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("footer", { staticClass: "modal-card-foot" }, [
+            _c(
+              "button",
+              {
+                staticClass: "button is-primary",
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    return _vm.update(
+                      _vm.modal_name,
+                      _vm.modal_quote,
+                      _vm.modal_description,
+                      _vm.modal_kind_id,
+                      _vm.modal_editSpells
+                    )
+                  }
+                }
+              },
+              [_vm._v("Save changes")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "button is-primary",
+                attrs: { type: "button", "aria-label": "Fill modal" },
+                on: { click: _vm.fill }
+              },
+              [_vm._v("Show previous/Reset")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "button is-primary",
+                attrs: { type: "button", "aria-label": "Close modal" },
+                on: { click: _vm.close }
+              },
+              [_vm._v("Cancel")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("ModalMessage", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isModalMessageVisible,
+              expression: "isModalMessageVisible"
+            }
+          ],
+          attrs: {
+            messageTitle: this.messageTitle,
+            createdSpell: this.createdSpell
+          },
+          on: { close: _vm.closeModalMessage }
+        })
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/base/ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal",
+      on: {
+        mouseenter: function($event) {
+          return _vm.query(_vm.createdSpell.description)
+        }
+      },
+      model: {
+        value: _vm.createdSpell.description,
+        callback: function($$v) {
+          _vm.$set(_vm.createdSpell, "description", $$v)
+        },
+        expression: "createdSpell.description"
+      }
+    },
+    [
       _c("div", { staticClass: "modal-background" }),
       _vm._v(" "),
       _c("div", { staticClass: "modal-card" }, [
         _c("header", { staticClass: "modal-card-head" }, [
-          _c("p", { staticClass: "modal-card-title" }, [_vm._v("Edit Entry")]),
+          _c("p", { staticClass: "modal-card-title" }, [
+            _vm._v(_vm._s(_vm.messageTitle))
+          ]),
           _vm._v(" "),
           _c("button", {
             staticClass: "delete",
-            attrs: { "aria-label": "close" },
+            attrs: { "aria-label": "Close modal" },
             on: { click: _vm.close }
           })
         ]),
         _vm._v(" "),
         _c("section", { staticClass: "modal-card-body" }, [
-          _c("div", { staticClass: "columns is-multiline is-mobile" }, [
-            _c("div", { staticClass: "column is-two-thirds" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.modal_name,
-                    expression: "modal_name"
-                  }
-                ],
-                key: "spellSlug",
-                staticClass: "input is-primary",
-                attrs: { type: "text", placeholder: "Spell Name" },
-                domProps: { value: _vm.modal_name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.modal_name = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "column is-2" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.modal_kind_id,
-                    expression: "modal_kind_id"
-                  }
-                ],
-                staticClass: "input is-primary",
-                attrs: { type: "text", placeholder: "Kind Id" },
-                domProps: { value: _vm.modal_kind_id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.modal_kind_id = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "column is-full" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.modal_quote,
-                    expression: "modal_quote"
-                  }
-                ],
-                staticClass: "input is-primary",
-                attrs: { type: "text", placeholder: "Spell Quote" },
-                domProps: { value: _vm.modal_quote },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.modal_quote = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "column is-full" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.modal_description,
-                    expression: "modal_description"
-                  }
-                ],
-                staticClass: "textarea is-primary",
-                attrs: { type: "text", placeholder: "Spell Description" },
-                domProps: { value: _vm.modal_description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.modal_description = $event.target.value
-                  }
-                }
-              })
-            ])
-          ])
+          _c("h1", [_vm._v("You just created:")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "table-container",
+              staticStyle: { "padding-top": "25px" }
+            },
+            [
+              _c("table", { staticClass: "table" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.modal_showSpells, function(spells) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(spells.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(spells.slug))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(spells.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(spells.quote))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(spells.description))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(spells.kind_id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(spells.created_at))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(spells.updated_at))])
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("footer", { staticClass: "modal-card-foot" }, [
@@ -21981,47 +22237,42 @@ var render = function() {
             "button",
             {
               staticClass: "button is-primary",
-              attrs: { type: "submit" },
-              on: {
-                click: function($event) {
-                  return _vm.update(
-                    _vm.modal_name,
-                    _vm.modal_quote,
-                    _vm.modal_description,
-                    _vm.modal_kind_id,
-                    _vm.modal_editSpells
-                  )
-                }
-              }
-            },
-            [_vm._v("Save changes")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "button is-primary",
-              attrs: { type: "button", "aria-label": "Fill modal" },
-              on: { click: _vm.fill }
-            },
-            [_vm._v("Fill")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "button is-primary",
-              attrs: { type: "button", "aria-label": "Close modal" },
+              attrs: { "aria-label": "Close modal" },
               on: { click: _vm.close }
             },
-            [_vm._v("Cancel")]
+            [_vm._v("OK")]
           )
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Slug")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Quote")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Kind")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Created at")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated at")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -34254,7 +34505,8 @@ window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('query-message', __webpack_require__(/*! ./components/base/QueryMessage.vue */ "./resources/js/components/base/QueryMessage.vue")["default"]);
-Vue.component('modal-component', __webpack_require__(/*! ./components/base/ModalComponent.vue */ "./resources/js/components/base/ModalComponent.vue")["default"]);
+Vue.component('modal-component', __webpack_require__(/*! ./components/base/ModalSpellComponent.vue */ "./resources/js/components/base/ModalSpellComponent.vue")["default"]);
+Vue.component('modal-message', __webpack_require__(/*! ./components/base/ModalSpellMessage.vue */ "./resources/js/components/base/ModalSpellMessage.vue")["default"]);
 Vue.component('list-spells', __webpack_require__(/*! ./components/ListSpells.vue */ "./resources/js/components/ListSpells.vue")["default"]);
 Vue.component('search-spells', __webpack_require__(/*! ./components/SearchSpells.vue */ "./resources/js/components/SearchSpells.vue")["default"]);
 Vue.component('edit-spells', __webpack_require__(/*! ./components/EditSpells.vue */ "./resources/js/components/EditSpells.vue")["default"]);
@@ -34288,8 +34540,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _utilities_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utilities/Form */ "./resources/js/utilities/Form.js");
-/* harmony import */ var _components_base_ModalComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/base/ModalComponent */ "./resources/js/components/base/ModalComponent.vue");
-/* harmony import */ var _components_base_QueryMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/base/QueryMessage */ "./resources/js/components/base/QueryMessage.vue");
+/* harmony import */ var _components_base_ModalSpellComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/base/ModalSpellComponent */ "./resources/js/components/base/ModalSpellComponent.vue");
+/* harmony import */ var _components_base_ModalSpellMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/base/ModalSpellMessage */ "./resources/js/components/base/ModalSpellMessage.vue");
+/* harmony import */ var _components_base_QueryMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/base/QueryMessage */ "./resources/js/components/base/QueryMessage.vue");
 /**
  * Load all needed JavaScript modules for working with ajax-requests and some
  * base compulsory functions for using data objects.
@@ -34302,10 +34555,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 window._ = lodash__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
-window.ModalComponent = _components_base_ModalComponent__WEBPACK_IMPORTED_MODULE_3__["default"];
-window.QueryMessage = _components_base_QueryMessage__WEBPACK_IMPORTED_MODULE_4__["default"];
+window.ModalComponent = _components_base_ModalSpellComponent__WEBPACK_IMPORTED_MODULE_3__["default"];
+window.ModalMessage = _components_base_ModalSpellComponent__WEBPACK_IMPORTED_MODULE_3__["default"];
+window.QueryMessage = _components_base_QueryMessage__WEBPACK_IMPORTED_MODULE_5__["default"];
 window.Form = _utilities_Form__WEBPACK_IMPORTED_MODULE_2__["default"]; // Set token in header for axios to keep requests secure
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -34408,14 +34663,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/CreateSpells.vue ***!
   \**************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateSpells_vue_vue_type_template_id_7e48ecd2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateSpells.vue?vue&type=template&id=7e48ecd2&scoped=true& */ "./resources/js/components/CreateSpells.vue?vue&type=template&id=7e48ecd2&scoped=true&");
 /* harmony import */ var _CreateSpells_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateSpells.vue?vue&type=script&lang=js& */ "./resources/js/components/CreateSpells.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CreateSpells_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CreateSpells_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -34445,7 +34701,7 @@ component.options.__file = "resources/js/components/CreateSpells.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/CreateSpells.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34818,18 +35074,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/base/ModalComponent.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/base/ModalComponent.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/components/base/ModalSpellComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/base/ModalSpellComponent.vue ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ModalComponent_vue_vue_type_template_id_28af021a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalComponent.vue?vue&type=template&id=28af021a& */ "./resources/js/components/base/ModalComponent.vue?vue&type=template&id=28af021a&");
-/* harmony import */ var _ModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/base/ModalComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _ModalSpellComponent_vue_vue_type_template_id_437dddaf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalSpellComponent.vue?vue&type=template&id=437dddaf& */ "./resources/js/components/base/ModalSpellComponent.vue?vue&type=template&id=437dddaf&");
+/* harmony import */ var _ModalSpellComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalSpellComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/base/ModalSpellComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ModalSpellComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalSpellComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -34840,9 +35096,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ModalComponent_vue_vue_type_template_id_28af021a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ModalComponent_vue_vue_type_template_id_28af021a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ModalSpellComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalSpellComponent_vue_vue_type_template_id_437dddaf___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalSpellComponent_vue_vue_type_template_id_437dddaf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -34852,54 +35108,123 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/base/ModalComponent.vue"
+component.options.__file = "resources/js/components/base/ModalSpellComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/base/ModalComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/base/ModalComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/base/ModalSpellComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/base/ModalSpellComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalSpellComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalSpellComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/base/ModalComponent.vue?vue&type=template&id=28af021a&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/base/ModalComponent.vue?vue&type=template&id=28af021a& ***!
-  \****************************************************************************************/
+/***/ "./resources/js/components/base/ModalSpellComponent.vue?vue&type=template&id=437dddaf&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/base/ModalSpellComponent.vue?vue&type=template&id=437dddaf& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_template_id_28af021a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalComponent.vue?vue&type=template&id=28af021a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalComponent.vue?vue&type=template&id=28af021a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_template_id_28af021a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_template_id_437dddaf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalSpellComponent.vue?vue&type=template&id=437dddaf& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellComponent.vue?vue&type=template&id=437dddaf&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_template_id_437dddaf___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_template_id_28af021a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellComponent_vue_vue_type_template_id_437dddaf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/base/ModalSpellMessage.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/base/ModalSpellMessage.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalSpellMessage_vue_vue_type_template_id_1b3d8a39_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true& */ "./resources/js/components/base/ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true&");
+/* harmony import */ var _ModalSpellMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalSpellMessage.vue?vue&type=script&lang=js& */ "./resources/js/components/base/ModalSpellMessage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModalSpellMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalSpellMessage_vue_vue_type_template_id_1b3d8a39_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalSpellMessage_vue_vue_type_template_id_1b3d8a39_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1b3d8a39",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/base/ModalSpellMessage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/base/ModalSpellMessage.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/base/ModalSpellMessage.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalSpellMessage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellMessage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/base/ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/base/ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true& ***!
+  \*******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellMessage_vue_vue_type_template_id_1b3d8a39_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/base/ModalSpellMessage.vue?vue&type=template&id=1b3d8a39&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellMessage_vue_vue_type_template_id_1b3d8a39_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalSpellMessage_vue_vue_type_template_id_1b3d8a39_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
