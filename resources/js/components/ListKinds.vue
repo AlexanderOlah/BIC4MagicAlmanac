@@ -1,18 +1,8 @@
 <template>
     <div>
         <div class="container is-fluid">
-            <div>
-                <h1 class="title is-3 is-spaced" >Edit the chosen Kind</h1>
 
-                <div class="columns is-multiline is-mobile">
-                    <div class="column is-two-thirds"><input v-model="name" class="input is-primary" type="text" key="kindSlug" placeholder="Kind Name"></div>
-                    <div class="column is-full"><textarea v-model="description" class="textarea is-primary" type="text" placeholder="Kind Description"></textarea></div>
-                </div>
-
-                <button class="button is-primary" type="submit" v-on:click="update(name, description, editKinds)">Submit</button>
-            </div>
-
-            <h1 class="title is-3 is-spaced" style="padding-top: 100px">List of all Kinds</h1>
+            <h1 class="title is-3 is-spaced" >List of all Kinds</h1>
             <div class="table-container" >
                 <table class="table is-striped is-hoverable table-hover">
                     <thead>
@@ -26,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="kinds in listKinds" :key="kinds.id" v-on:click="edit(kinds)">
+                        <tr v-for="kinds in listKinds" :key="kinds.id" v-on:dblclick="showModal(kinds)">
                             <td>{{kinds.id}}</td>
                             <td>{{kinds.slug}}</td>
                             <td>{{kinds.name}}</td>
@@ -38,11 +28,26 @@
                 </table>
             </div>
         </div>
+
+        <ModalKindsComponent
+            v-show="isKindsModalVisible"
+            @close="closeModal"
+            :description="this.modal_description"
+            :name = "this.modal_name"
+            :slug = "this.modal_slug"
+            :editKinds = "this.editKinds"
+        />
+
     </div>
 </template>
 
 <script>
+    import ModalKindsComponent from "./base/ModalKindsComponent";
+
     export default {
+        components: {
+            ModalKindsComponent,
+        },
         mounted() {
             console.log('Component mounted.')
         },
@@ -51,7 +56,12 @@
               name: "",
               description: "",
               editKinds: {},
-              listKinds: {}
+              listKinds: {},
+
+              isKindsModalVisible: false,
+              modal_name: '',
+              modal_description: '',
+              modal_slug:''
           }
         },
         created() {
@@ -61,18 +71,17 @@
         },
 
         methods: {
-            edit(kinds) {
-                this.name = kinds.name
-                this.description = kinds.description
+            showModal(kinds) {
+                this.modal_name = kinds.name
+                this.modal_description = kinds.description
+                this.modal_slug = kinds.slug
                 this.editKinds = kinds
-                console.log('Edit kinds called.')
+                this.isKindsModalVisible = true
+                console.log('showKindsModal called.')
             },
-            update(name, description, editKinds) {
-                axios
-                    .put('/kind/'+ editKinds.slug, {name, description})
-                    .then(({data}) => this.editKinds = data);
-                console.log('Update kinds called.')
-            }
+            closeModal() {
+                this.isKindsModalVisible = false;
+            },
         }
     };
 </script>

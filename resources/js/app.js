@@ -23,6 +23,8 @@ window.Vue = vue;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
+Vue.component('modal-kinds-component', require('./components/base/ModalKindsComponent.vue').default);
+Vue.component('modal-kinds-message', require('./components/base/ModalKindsMessage.vue').default);
 Vue.component('modal-component', require('./components/base/ModalSpellComponent.vue').default);
 Vue.component('modal-message', require('./components/base/ModalSpellMessage.vue').default);
 

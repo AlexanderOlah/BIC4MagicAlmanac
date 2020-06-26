@@ -10,14 +10,18 @@ import axios from 'axios';
 
 // Some custom modules to make developing faster
 import Form from './utilities/Form';
+import ModalKindsComponent from './components/base/ModalKindsComponent';
+import ModalKindsMessage from './components/base/ModalKindsMessage';
 import ModalComponent from './components/base/ModalSpellComponent';
 import ModalMessage from './components/base/ModalSpellMessage';
 import QueryMessage from './components/base/QueryMessage';
 
 window._ = lodash;
 window.axios = axios;
+window.ModalKindsComponent = ModalKindsComponent;
+window.ModalKindsMessage = ModalKindsMessage;
 window.ModalComponent = ModalComponent;
-window.ModalMessage = ModalComponent;
+window.ModalMessage = ModalMessage;
 window.QueryMessage = QueryMessage;
 window.Form = Form;
 
