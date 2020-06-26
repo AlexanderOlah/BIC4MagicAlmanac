@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="spells in searchSpells" :key="spells.id" v-on:click="edit(spells)">
+                    <tr v-for="spells in searchSpells" :key="spells.id" v-on:click="showModal(spells)">
                         <td>{{spells.id}}</td>
                         <td>{{spells.slug}}</td>
                         <td>{{spells.name}}</td>
@@ -49,11 +49,29 @@
 
             <button class="button is-primary" type="submit" v-on:click="update(name, quote, description, kind_id, editSpells)">Submit</button>
         </div>
+
+        <ModalComponent
+            v-show="isModalVisible"
+            @close="closeModal"
+            :description="this.modal_description"
+            :kind_id="this.modal_kind_id"
+            :name = "this.modal_name"
+            :quote = "this.modal_quote"
+            :slug = "this.modal_slug"
+            :editSpells = "this.editSpells"
+            @open="ModalComponent.fill()"
+        />
+
     </div>
 </template>
 
 <script>
+    import ModalComponent from "./base/ModalComponent";
     export default {
+        components: {
+            ModalComponent,
+        },
+        name: "SearchSpells",
         mounted() {
             console.log('Component mounted.')
         },
@@ -65,11 +83,23 @@
                 name: "",
                 quote:"",
                 description:"",
-                kind_id: ""
+                kind_id: "",
+
+                isModalVisible: false,
+                modal_name: '',
+                modal_quote: '',
+                modal_description: '',
+                modal_kind_id: '',
+                modal_slug:''
             }
         },
         created() {
             },
+        computed: {
+            showSuccessMessage() {
+                return this.successMessage !== '';
+            }
+        },
 
         methods: {
             query(q) {
@@ -83,6 +113,7 @@
                 this.quote = spells.quote
                 this.description = spells.description
                 this.kind_id = spells.kind_id
+                this.slug = spells.slug
                 this.editSpells = spells
                 console.log('Edit spells called.')
             },
@@ -91,7 +122,18 @@
                     .put('/spell/'+ editSpells.slug, {name, quote, description, kind_id})
                     .then(({data}) => this.editSpells = data);
                 console.log('Update spells called.')
-            }
+            },
+            showModal(spells) {
+                this.modal_name = spells.name
+                this.modal_quote = spells.quote
+                this.modal_description = spells.description
+                this.modal_kind_id = spells.kind_id
+                this.isModalVisible = true;
+                console.log('showModal called.')
+            },
+            closeModal() {
+                this.isModalVisible = false;
+            },
         }
     }
 </script>

@@ -6794,7 +6794,7 @@ a.list-item {
 .modal-card-head,
 .modal-card-foot {
   align-items: center;
-  background-color: whitesmoke;
+  background-color: #cecefd;
   display: flex;
   flex-shrink: 0;
   justify-content: flex-start;

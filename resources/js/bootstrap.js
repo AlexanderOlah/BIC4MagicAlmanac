@@ -10,10 +10,12 @@ import axios from 'axios';
 
 // Some custom modules to make developing faster
 import Form from './utilities/Form';
+import ModalComponent from './components/base/ModalComponent';
 import QueryMessage from './components/base/QueryMessage';
 
 window._ = lodash;
 window.axios = axios;
+window.ModalComponent = ModalComponent;
 window.QueryMessage = QueryMessage;
 window.Form = Form;
 
