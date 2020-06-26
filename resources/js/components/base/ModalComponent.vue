@@ -1,6 +1,6 @@
 <template>
     <transition name="modal-fade">
-            <div class="modal">
+            <div class="modal" v-on:mouseenter="fill()">
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -21,7 +21,7 @@
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button is-primary" type="submit" v-on:click="update(modal_name, modal_quote, modal_description, modal_kind_id, modal_editSpells)">Save changes</button>
-                        <button type="button" class="button is-primary" @click="fill" aria-label="Fill modal">Fill</button>
+                        <button type="button" class="button is-primary" @click="fill" aria-label="Fill modal">Show previous/Reset</button>
                         <button type="button" class="button is-primary" @click="close" aria-label="Close modal">Cancel</button>
                     </footer>
                 </div>
@@ -95,7 +95,14 @@
         },
         methods: {
             close() {
+                this.modal_name = ""
+                this.modal_quote = ""
+                this.modal_description = ""
+                this.modal_kind_id = ""
+                this.modal_slug = ""
+                this.modal_editSpells = ""
                 this.$emit('close');
+                console.log('Modal closed & cleared.')
             },
             fill(){
                 this.modal_name = this.name
@@ -116,5 +123,10 @@
         created() {
             console.log('ModalComponent created.')
         },
+        computed:{
+            fills(){
+                return this.fill();
+            }
+        }
     };
 </script>
