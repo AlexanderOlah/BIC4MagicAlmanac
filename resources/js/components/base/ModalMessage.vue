@@ -1,5 +1,5 @@
 <template>
-    <div class="modal">
+    <div class="modal" v-model="createdSpell.description" v-on:mouseenter="query(createdSpell.description)">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -25,15 +25,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>{{createdSpell.id}}</td>
-                            <td>{{createdSpell.slug}}</td>
-                            <td>{{createdSpell.name}}</td>
-                            <td>{{createdSpell.quote}}</td>
-                            <td>{{createdSpell.description}}</td>
-                            <td>{{createdSpell.kind_id}}</td>
-                            <td>{{createdSpell.created_at}}</td>
-                            <td>{{createdSpell.updated_at}}</td>
+                        <tr v-for="spells in modal_showSpells">
+                            <td>{{spells.id}}</td>
+                            <td>{{spells.slug}}</td>
+                            <td>{{spells.name}}</td>
+                            <td>{{spells.quote}}</td>
+                            <td>{{spells.description}}</td>
+                            <td>{{spells.kind_id}}</td>
+                            <td>{{spells.created_at}}</td>
+                            <td>{{spells.updated_at}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -42,7 +42,6 @@
             </section>
             <footer class="modal-card-foot">
                 <button class="button is-primary" @click="close" aria-label="Close modal">OK</button>
-                <button class="button is-primary" @click="getNew(createdSpell)" aria-label="Close modal">Get</button>
             </footer>
         </div>
     </div>
@@ -63,7 +62,7 @@
         data() {
             return {
                 modal_message: "",
-                modal_showSpells:""
+                modal_showSpells: {},
             }
         },
         methods: {
@@ -71,12 +70,12 @@
                 this.$emit('close');
                 console.log('ModalMessage closed & cleared.')
             },
-            getNew(createdSpell){
+            query(q){
+                console.log('Testing: Description for this call before searchSpell was ' + q)
                 axios
-                    .get('/spell/'+ createdSpell.slug)
+                    .post('/search/spell', {q})
                     .then(({data}) => this.modal_showSpells = data);
-                console.log('getNew spells called.')
-                console.log('Testing: Slug for this call was .' + createdSpell.slug)
+                console.log('searchSpell called.')
             }
         }
     }

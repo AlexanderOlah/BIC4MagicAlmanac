@@ -103,9 +103,10 @@
                 modal_description:"",
                 modal_kind_id: "",
                 modal_slug:"",
+                modal_showSpells: {},
                 isModalMessageVisible: false,
                 messageTitle:"",
-                createdSpell:""
+                createdSpell: {}
             }
         },
         methods: {
@@ -137,12 +138,6 @@
             },
             // for our success/fail message popup
             showModalMessage(messageTitle, editSpells) {
-
-                axios
-                    .get('/spell/'+ editSpells.slug)
-                    .then(({data}) => this.modal_showSpells = data);
-                console.log('getNew spells called.')
-                console.log('Testing: Slug for this call was .' + editSpells.slug)
 
                 this.messageTitle = messageTitle
                 this.createdSpell = editSpells

@@ -7,7 +7,14 @@
 
             <div class="columns is-multiline is-mobile">
                 <div class="column is-two-thirds"><input v-model="name" class="input is-primary" type="text"  placeholder="Spell Name"></div>
-                <div class="column is-2"><input v-model="kind_id" class="input is-primary" type="text"  placeholder="Kind ID"></div>
+                <div class="field">
+                    <label class="label">Kind Id:</label>
+                    <div class="control">
+                        <select v-model="kind_id" class="form-control select">
+                            <option v-for="kinds in listKinds" :key="kinds.id">{{kinds.id}}</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="column is-full"><input v-model="quote" class="input is-primary" type="text"  placeholder="Spell Quote"></div>
 
@@ -31,11 +38,14 @@
         data() {
             return {
                 name:"", quote:"", description:"", kind_id:"",
-                createSpells: {}
+                createSpells: {},
+                listKinds: {}
             }
         },
         created() {
-
+            axios.get('/list/kind')
+                .then(({data}) => this.listKinds = data);
+            console.log('List kinds created.')
         },
 
         methods: {
