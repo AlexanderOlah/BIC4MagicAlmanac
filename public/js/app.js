@@ -35204,8 +35204,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Volumes/Extern/Marlene/Dropbox/4. Semester/IE – Information Engineering/Projekt/Git-Repo/BIC4MagicAlmanac/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Volumes/Extern/Marlene/Dropbox/4. Semester/IE – Information Engineering/Projekt/Git-Repo/BIC4MagicAlmanac/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\nikol\PhpstormProjects\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
