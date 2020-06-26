@@ -7,12 +7,17 @@
 
             <div class="columns is-multiline is-mobile">
                 <div class="column is-two-thirds"><input v-model="name" class="input is-primary" type="text"  placeholder="Spell Name"></div>
-                <div class="field">
-                    <label class="label">Kind Id:</label>
-                    <div class="control">
-                        <select v-model="kind_id" class="form-control select">
-                            <option v-for="kinds in listKinds" :key="kinds.id">{{kinds.id}}</option>
-                        </select>
+
+                <div class="column is-one-third">
+                    <div class="field is-horizontal">
+                        <label class="field-label is-normal">Kind Id:</label>
+                        <div class="control">
+                            <div class="select is-primary">
+                                <select v-model="kind_id" class="form-control select">
+                                    <option v-for="kinds in listKinds" :key="kinds.id">{{kinds.id}}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
